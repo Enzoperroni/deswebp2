@@ -36,6 +36,7 @@ const preenche = (atleta) => {
     container.appendChild(titulo);
     container.appendChild(imagem);
     container.appendChild(descricao);
+
     container.onclick = handleClick;
   
     document.body.appendChild(container);
@@ -43,12 +44,34 @@ const preenche = (atleta) => {
 
 const handleClick = (e) => {
     const artigo = e.target.closest('article');
+    //cookie
     document.cookie = `id =${artigo.dataset.id} `;
     document.cookie = `nome_completo =${artigo.dataset.nome_completo} `;
     document.cookie = `nascimento =${artigo.dataset.nascimento} `;
     document.cookie = `altura =${artigo.dataset.altura} `;
 
+    //sessionStorage
+    localStorage.setItem('id', artigo.dataset.id);
+    localStorage.setItem('nome_completo', artigo.dataset.nome_completo);
+    localStorage.setItem('nascimento', artigo.dataset.nascimento);
+    localStorage.setItem('altura', artigo.dataset.altura);
+    localStorage.setItem('dados-original', artigo.dataset);
+    localStorage.setItem('dados', JSON.stringify(artigo.dataset));
+
+    //sessionStotage
+    sessionStorage.setItem('id', artigo.dataset.id);
+    sessionStorage.setItem('nome_completo', artigo.dataset.nome_completo);
+    sessionStorage.setItem('nascimento', artigo.dataset.nascimento);
+    sessionStorage.setItem('altura', artigo.dataset.altura);
+    sessionStorage.setItem('dados-original', artigo.dataset);
+    sessionStorage.setItem('dados', JSON.stringify(artigo.dataset));
+
+
     console.log(acha_cookie('nome_completo'));
+    console.log(localStorage.getItem('id'));
+    console.log(JSON.parse(localStorage.getItem('dados')).altura);
+
+    window.location = `outra.html?id=${artigo.dataset.id}&nome_completo=${artigo.dataset.nome_completo}`
 }
 
 const acha_cookie = (chave) => {
